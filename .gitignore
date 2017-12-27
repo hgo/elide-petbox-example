@@ -5,3 +5,11 @@ target
 .DS_Store
 petbox.iml
 
+
+node_modules
+
+
+
+
+*lock.json
+
