@@ -10,7 +10,7 @@
 - `./n.sh b` from start nginx
 - `./n.sh e` from stop nginx
 
-#### Furher Info
+#### Further Info
 For simplicity & to depend on json-api, client side libs
 - `@holidayextras/jsonapi-client`
 
