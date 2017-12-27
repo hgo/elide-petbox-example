@@ -27,8 +27,8 @@ angular.module('spa', ['schemaForm'])
                     q.reject(err);
                 } else{
                     var result = resources.map(function(resource) {
-                                resource.toJSON();
-                    });
+                                        return resource.toJSON();
+                                });
                     q.resolve(result);
                 }
             });
@@ -48,7 +48,10 @@ angular.module('spa', ['schemaForm'])
 
     $scope.getUsers = function(){
         ApiClient.getUsers().then(function(result){
-            console.info(result);
+            var pre = document.querySelector('#js_getUsersResponse');
+            var code = pre.querySelector('code');
+            code.innerHTML = JSON.stringify(result,null, 4);
+            hljs.highlightBlock(pre);
         },function(err){
             console.err(err);
         })
@@ -59,16 +62,12 @@ angular.module('spa', ['schemaForm'])
         properties: {
           email: { type: "string", minLength: 2, title: "Email" },
           name: { type: "string", minLength: 2, title: "Name" },
-          password: {
-            type: "string",
-            minLength: 2
-//            enum: ['dr','jr','sir','mrs','mr','NaN','dj']
-          }
+          password: { type: "string", minLength: 4 }
         }
       };
 
       $scope.form = [
-        "*",
+        "email","name",{"key": "password", "type": "password"},
         {
           type: "submit",
           title: "Save"
@@ -80,12 +79,12 @@ angular.module('spa', ['schemaForm'])
     $scope.onSubmit = function(userForm){
         if (userForm.$valid) {
             ApiClient.newUser($scope.model).then(function(a){
-                console.info('user posted', a.toJSON());
+                alert('user posted', a.toJSON());
             },function(err){
                 console.err(err);
             });
         }else{
-            alert('not valid');
+            alert('not valid see console');
             console.info(userForm);
         }
     }

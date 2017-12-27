@@ -7,6 +7,7 @@
 
 
 ### Running
+- `java -jar target/petbox-jar-with-dependencies.jar` 
 - `./n.sh b` from start nginx
 - `./n.sh e` from stop nginx
 
