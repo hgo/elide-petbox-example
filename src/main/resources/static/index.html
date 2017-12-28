@@ -16,53 +16,55 @@
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="public/milligram.min.css">
     <link rel="stylesheet" href="public/default.css">
-
+    <script type="text/javascript" src="public/api/ApiClient.js"></script>
+    <script type="text/javascript" src="public/api/Auth.js"></script>
+    <script type="text/javascript" src="public/api/User.js"></script>
     <script type="text/javascript" src="public/spa.js"></script>
 </head>
 <body ng-app="spa">
 
-<div class="container" ng-controller="FormController">
-    <h1>Users</h1>
-    <h2>Post</h2>
-    <div class="row">
-        <div class="column">
-            <pre>
-<code class="json">
-    $scope.schema = {
-        type: "object",
-        properties: {
-          email: { type: "string", minLength: 2, title: "Email" },
-          name: { type: "string", minLength: 2, title: "Name" },
-          password: {
-            type: "password",
-            minLength: 2
-          }
-        }
-    };
-</code>
-            </pre>
-        </div>
-        <div class="column">
-            <div>
-                <form sf-schema="schema" sf-form="form" sf-model="model" name="userForm"
-                      ng-submit="onSubmit(userForm)"></form>
+<div class="container">
+    <div ng-controller="AuthController">
+        <h1>User Authorization Header</h1>
+        <div class="row">
+            <div class="column column-50">
+                <form ng-submit="setAuthorizationHeader()" name="authForm">
+                    <div class="form-group">
+                        <label class="control-label" for="token">Token (Current : {{ vm.token ? vm.token :
+                            'Empty'}})</label>
+                        <input id="token" type="text" name="token" ng-model="tokenToSave">
+                    </div>
+                    <div class="form-group schema-form-submit ">
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <h2>Get</h2>
-    <div class="row">
-        <div class="column">
-            <button type="button" ng-click="getUsers()">Get Users</button>
-            <pre id="js_getUsersResponse"><code class="json">
-
-            </code></pre>
+    <div ng-controller="UserController">
+        <h1>Users</h1>
+        <h2>Post</h2>
+        <div class="row">
+            <div class="column">
+                <hljs-code code="code.scheme" type="json"></hljs-code>
+            </div>
+            <div class="column">
+                <div>
+                    <form sf-schema="schema" sf-form="form" sf-model="model" name="userForm"
+                          ng-submit="onSubmit(userForm)"></form>
+                </div>
+            </div>
         </div>
+        <h2>Get</h2>
+        <div class="row">
+            <div class="column">
+                <button type="button" ng-click="getUsers()">Get Users</button>
+                <hljs-code code="code.getUsers" type="json"></hljs-code>
+            </div>
+        </div>
+
     </div>
 
-    <!--<div class="row">-->
-    <!--<div class="column">.column</div>-->
-    <!--<div class="column column-50 column-offset-25">.column column-50 column-offset-25</div>-->
-    <!--</div>-->
 
 </div>
 
